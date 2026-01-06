@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1a1a1d" />
+    <title>Divine Words</title>
+    <link rel="manifest" href="/assets/manifest-QkRYPAAr.json" />
+    <link rel="apple-touch-icon" href="https://placehold.co/192x192/DC143C/ffffff?text=DW">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: 'var(--brand-color)',
+              bg: 'var(--bg-color)',
+              text: 'var(--text-color)',
+              card: 'var(--verse-card-bg)',
+              border: 'var(--options-panel-border)',
+            },
+            fontFamily: {
+              serif: ['"Merriweather"', 'serif'],
+              sans: ['"Montserrat"', 'sans-serif'],
+              slab: ['"Roboto Slab"', 'serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      /* Custom Scrollbar for dark themes */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-color); 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--options-panel-border); 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--brand-color); 
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-BbwoAah5.js"></script>
+</head>
+  <body>
+    <div id="root"></div>
+</body>
+</html>
