@@ -1,0 +1,22 @@
+{
+  "name": "Divine Words",
+  "short_name": "Divine Words",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1a1a1d",
+  "theme_color": "#DC143C",
+  "description": "An offline-first, private, and customizable Bible study and presentation tool.",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://placehold.co/192x192/DC143C/ffffff?text=DW",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://placehold.co/512x512/DC143C/ffffff?text=DW",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
