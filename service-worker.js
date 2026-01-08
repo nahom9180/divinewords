@@ -1,10 +1,9 @@
-const CACHE_NAME = 'divine-words-v3';
-const BASE_URL = "https://nahom9180.github.io/divinewords"
+const CACHE_NAME = 'divine-words-v4'; // Incremented version
 const INITIAL_ASSETS = [
-  `${BASE_URL}/`,
-  `${BASE_URL}/index.html`,
-  `${BASE_URL}/assets/manifest-QkRYPAAr.json`,
-  `${BASE_URL}/assets/index-CqOucdIa.js`,
+  './',
+  './index.html',
+  './assets/manifest-QkRYPAAr.json',
+  './assets/index-CqOucdIa.js',
   'https://cdn.tailwindcss.com',
   'https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Roboto+Slab:wght@400;700&display=swap',
   'https://esm.sh/react@^19.2.3',
@@ -15,13 +14,25 @@ const INITIAL_ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      // Use addAll for atomic all-or-nothing caching
-      return cache.addAll(INITIAL_ASSETS);
+    caches.open(CACHE_NAME).then(async (cache) => {
+      // We use a loop to catch specific errors for debugging
+      // If one file fails, the whole cache fails.
+      for (const url of INITIAL_ASSETS) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Status: ${response.status}`);
+          }
+          await cache.put(url, response);
+        } catch (error) {
+          console.error(`❌ FAILED to cache: ${url}`, error);
+          // If you see this error in your console, THAT is why the cache is empty.
+        }
+      }
     })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
@@ -45,38 +56,24 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      // Return cached response if available
       if (cachedResponse) {
         return cachedResponse;
       }
 
-      // Clone the request for the fetch
-      const fetchRequest = event.request.clone();
-
-      return fetch(fetchRequest).then((response) => {
-        // Check if we received a valid response.
-        // We permit opaque responses (status 0) which happen with no-cors requests to CDNs.
+      return fetch(event.request).then((response) => {
         if (!response || (response.status !== 200 && response.type !== 'opaque')) {
           return response;
         }
 
-        // Clone the response because it's a stream and can only be consumed once
         const responseToCache = response.clone();
-
         caches.open(CACHE_NAME).then((cache) => {
-          try {
-             cache.put(event.request, responseToCache);
-          } catch (err) {
-             console.warn('Failed to cache response', err);
-          }
+          cache.put(event.request, responseToCache);
         });
 
         return response;
       }).catch((error) => {
-          console.error('Fetch failed:', error);
-          // Optional: Return a custom offline page or placeholder here
-          // For now, we rely on the cache or fail if totally offline and uncached
-          throw error;
+         // console.error('Fetch failed:', error);
+         // You can return a custom offline page here if needed
       });
     })
   );
