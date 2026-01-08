@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1a1a1d" />
     <title>Divine Words</title>
-    <link rel="manifest" href="https://nahom9180.github.io/divinewords/assets/manifest-QkRYPAAr.json" />
+    <link rel="manifest" href="/assets/manifest-QkRYPAAr.json" />
     <link rel="apple-touch-icon" href="https://placehold.co/192x192/DC143C/ffffff?text=DW">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
       tailwind.config = {
         theme: {
@@ -63,20 +65,14 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="https://nahom9180.github.io/divinewords/assets/index-CqOucdIa.js"></script>
-  <!-- Add this before the closing </body> tag in index.html -->
-<script>
+  <script type="module" crossorigin src="/assets/index-9mAKbndg.js"></script>
+  <script>
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      // Register from ROOT to ensure correct scope
-      navigator.serviceWorker.register('./service-worker.js', { scope: './' })
-        .then((registration) => {
-          console.log('SW registered with scope:', registration.scope);
-        })
-        .catch((err) => {
-          console.log('SW registration failed:', err);
-        });
-    });
+    // This tells the browser: Look for the SW in the current folder (divinewords)
+    // and let it control everything in this folder (scope: './')
+    navigator.serviceWorker.register('./service-worker.js', { scope: './' })
+      .then(reg => console.log('SW Registered!', reg))
+      .catch(err => console.log('SW Failed:', err));
   }
 </script>
 </head>
