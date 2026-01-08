@@ -3,7 +3,7 @@ const INITIAL_ASSETS = [
   './',
   './index.html',
   './assets/manifest-QkRYPAAr.json',
-  "./assets/index-9mAKbndg.js",
+  './assets/index-DZmkXoMT.jss',
   'https://cdn.tailwindcss.com',
   'https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Roboto+Slab:wght@400;700&display=swap',
   'https://esm.sh/react@^19.2.3',
