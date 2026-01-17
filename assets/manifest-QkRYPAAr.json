@@ -2,7 +2,6 @@
   "name": "Divine Words",
   "short_name": "Divine Words",
   "start_url": "/divinewords/",
-  "scope": "/divinewords/",
   "display": "standalone",
   "background_color": "#1a1a1d",
   "theme_color": "#DC143C",
