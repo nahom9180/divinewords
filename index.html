@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +8,10 @@
     <title>Divine Words</title>
     <link rel="manifest" href="./assets/manifest-QkRYPAAr.json" />
     <link rel="apple-touch-icon" href="https://placehold.co/192x192/DC143C/ffffff?text=DW">
+    
+    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
@@ -64,29 +68,25 @@
       }
     </style>
 
-  <script type="importmap">
+<link rel="stylesheet" href="/index.css">
+<script type="importmap">
 {
   "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react-dom": "https://esm.sh/react-dom@^19.2.3",
-    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?external=react,react-dom"
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "dexie": "https://esm.sh/dexie@^4.2.1",
+    "zustand": "https://esm.sh/zustand@^5.0.10",
+    "zustand/": "https://esm.sh/zustand@^5.0.10/",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
   }
 }
 </script>
-  <script type="module" crossorigin src="./assets/index-DbgVE4It.js"></script>
-  <script>
-  if ('serviceWorker' in navigator) {
-    // This tells the browser: Look for the SW in the current folder (divinewords)
-    // and let it control everything in this folder (scope: './')
-    navigator.serviceWorker.register('./service-worker.js', { scope: './' })
-      .then(reg => console.log('SW Registered!', reg))
-      .catch(err => console.log('SW Failed:', err))
-  }
-</script>
+  <script type="module" crossorigin src="./assets/index-C-9Ao6eb.js"></script>
 </head>
   <body>
     <div id="root"></div>
-</body>
+  </body>
 </html>
