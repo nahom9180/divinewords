@@ -3,14 +3,61 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#1a1a1d" />
+    
+    <!-- PWA: iOS Native Feel -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Divine Words">
+
     <title>Divine Words</title>
-    <link rel="manifest" href="./assets/manifest-QkRYPAAr.json" />
+    <!-- Manifest is now injected by VitePWA -->
     <link rel="apple-touch-icon" href="https://placehold.co/192x192/DC143C/ffffff?text=DW">
     
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Anti-FOUC (Flash of Unstyled Content) Script -->
+    <!-- This applies the theme BEFORE React loads for instant rendering -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('dw_theme');
+          var themes = {
+            'creation_night': { '--bg-color': '#1a1a1d', '--text-color': '#c5c6c7', '--navbar-bg': '#000000', '--navbar-text': '#f0f0f0', '--brand-color': '#DC143C', '--verse-card-bg': '#2c2f33', '--reference-color': '#DC143C', '--options-panel-border': '#4f4f52', '--brand-color-rgb': '220, 20, 60' },
+            'creation_day': { '--bg-color': '#f4f4f8', '--text-color': '#333333', '--navbar-bg': '#DC143C', '--navbar-text': '#ffffff', '--brand-color': '#EE8A9E', '--verse-card-bg': '#ffffff', '--reference-color': '#B21030', '--options-panel-border': '#cccccc', '--brand-color-rgb': '238, 138, 158' },
+            'ancient_scroll': { '--bg-color': '#f4ecd8', '--text-color': '#5b4636', '--navbar-bg': '#e4dcb8', '--navbar-text': '#433422', '--brand-color': '#8b5a2b', '--verse-card-bg': '#fdfaf5', '--reference-color': '#8b5a2b', '--options-panel-border': '#d3c6a1', '--brand-color-rgb': '139, 90, 43' },
+            'galilee_mist': { '--bg-color': '#2e3440', '--text-color': '#d8dee9', '--navbar-bg': '#242933', '--navbar-text': '#eceff4', '--brand-color': '#88c0d0', '--verse-card-bg': '#3b4252', '--reference-color': '#81a1c1', '--options-panel-border': '#434c5e', '--brand-color-rgb': '136, 192, 208' },
+            'passion_vigil': { '--bg-color': '#282a36', '--text-color': '#f8f8f2', '--navbar-bg': '#1e1f29', '--navbar-text': '#f8f8f2', '--brand-color': '#bd93f9', '--verse-card-bg': '#44475a', '--reference-color': '#ff79c6', '--options-panel-border': '#6272a4', '--brand-color-rgb': '189, 147, 249' },
+            'apocalypse_neon': { '--bg-color': '#0b0c15', '--text-color': '#e0e0e0', '--navbar-bg': '#050505', '--navbar-text': '#00ff9f', '--brand-color': '#00ff9f', '--verse-card-bg': '#121420', '--reference-color': '#ff003c', '--options-panel-border': '#00ff9f', '--brand-color-rgb': '0, 255, 159' },
+            'sinai_day': { '--bg-color': '#fdf6e3', '--text-color': '#657b83', '--navbar-bg': '#eee8d5', '--navbar-text': '#586e75', '--brand-color': '#268bd2', '--verse-card-bg': '#fbf1c7', '--reference-color': '#b58900', '--options-panel-border': '#93a1a1', '--brand-color-rgb': '38, 139, 210' },
+            'sinai_night': { '--bg-color': '#002b36', '--text-color': '#839496', '--navbar-bg': '#073642', '--navbar-text': '#93a1a1', '--brand-color': '#b58900', '--verse-card-bg': '#073642', '--reference-color': '#2aa198', '--options-panel-border': '#586e75', '--brand-color-rgb': '181, 137, 0' },
+            'the_abyss': { '--bg-color': '#000000', '--text-color': '#d4d4d4', '--navbar-bg': '#000000', '--navbar-text': '#ffffff', '--brand-color': '#ffffff', '--verse-card-bg': '#0a0a0a', '--reference-color': '#808080', '--options-panel-border': '#333333', '--brand-color-rgb': '255, 255, 255' },
+            'living_water': { '--bg-color': '#e0f7ff', '--text-color': '#2a3f54', '--navbar-bg': '#4a90e2', '--navbar-text': '#ffffff', '--brand-color': '#357ABD', '--verse-card-bg': '#ffffff', '--reference-color': '#357ABD', '--options-panel-border': '#9cbadd', '--brand-color-rgb': '53, 122, 189' },
+            'olive_grove': { '--bg-color': '#0A140A', '--text-color': '#aaccbb', '--navbar-bg': '#102010', '--navbar-text': '#cce0dd', '--brand-color': '#50c878', '--verse-card-bg': '#0D1A0D', '--reference-color': '#50c878', '--options-panel-border': '#203020', '--brand-color-rgb': '80, 200, 120' },
+            'burning_bush': { '--bg-color': '#fff3e0', '--text-color': '#6d4c41', '--navbar-bg': '#ef6c00', '--navbar-text': '#ffffff', '--brand-color': '#F7B680', '--verse-card-bg': '#ffe0b2', '--reference-color': '#D84315', '--options-panel-border': '#ffb74d', '--brand-color-rgb': '247, 182, 128' },
+            'gethsemane': { '--bg-color': '#101028', '--text-color': '#D0D0E0', '--navbar-bg': '#0B0B1C', '--navbar-text': '#E0E0F0', '--brand-color': '#E91E63', '--verse-card-bg': '#1A1A3A', '--reference-color': '#E91E63', '--options-panel-border': '#2A2A50', '--brand-color-rgb': '233, 30, 99' },
+            'kingdom_glory': { '--bg-color': '#2e003e', '--text-color': '#f0e6fa', '--navbar-bg': '#1a0024', '--navbar-text': '#ffd700', '--brand-color': '#ffd700', '--verse-card-bg': '#3b0050', '--reference-color': '#ffd700', '--options-panel-border': '#5e0080', '--brand-color-rgb': '255, 215, 0' },
+            'stone_tablet': { '--bg-color': '#ffffff', '--text-color': '#000000', '--navbar-bg': '#ffffff', '--navbar-text': '#000000', '--brand-color': '#000000', '--verse-card-bg': '#ffffff', '--reference-color': '#333333', '--options-panel-border': '#000000', '--brand-color-rgb': '0, 0, 0' },
+            'green_pastures': { '--bg-color': '#000000', '--text-color': '#33ff00', '--navbar-bg': '#000000', '--navbar-text': '#33ff00', '--brand-color': '#33ff00', '--verse-card-bg': '#001a00', '--reference-color': '#33ff00', '--options-panel-border': '#33ff00', '--brand-color-rgb': '51, 255, 0' }
+          };
+          
+          var active = themes[saved] || themes['creation_night'];
+          
+          // Apply variables immediately
+          var root = document.documentElement;
+          for (var key in active) {
+            root.style.setProperty(key, active[key]);
+          }
+          
+          // Update Meta Theme Color for browser chrome
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', active['--bg-color']);
+          
+        } catch (e) { console.error("Theme init failed", e); }
+      })();
+    </script>
+
+    <!-- Tailwind CDN with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -35,6 +82,7 @@
     </script>
     <style>
       :root {
+        /* Fallback Defaults if script fails */
         --bg-color: #1a1a1d;
         --text-color: #c5c6c7;
         --navbar-bg: #000000;
@@ -50,6 +98,8 @@
         overflow-x: hidden;
         background-color: var(--bg-color);
         color: var(--text-color);
+        /* Mobile momentum scrolling */
+        -webkit-overflow-scrolling: touch;
       }
       /* Custom Scrollbar for dark themes */
       ::-webkit-scrollbar {
@@ -68,7 +118,7 @@
       }
     </style>
 
-
+<link rel="stylesheet" href="/index.css">
 <script type="importmap">
 {
   "imports": {
@@ -83,28 +133,16 @@
     "react/": "https://esm.sh/react@^19.2.3/",
     "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "dexie": "https://esm.sh/dexie@^4.2.1"
+    "dexie": "https://esm.sh/dexie@^4.2.1",
+    "@google/genai": "https://esm.sh/@google/genai@*",
+    "react-markdown": "https://esm.sh/react-markdown@^10.1.0",
+    "vite-plugin-pwa": "https://esm.sh/vite-plugin-pwa@^1.2.0"
   }
 }
 </script>
-  <script type="module" crossorigin src="./assets/index-YW6-nJEG.js"></script>
-</head>
+  <script type="module" crossorigin src="./assets/index-Cen6tLtI.js"></script>
+<link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
   <body>
     <div id="root"></div>
-  
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          // Register with the specific scope requested
-          navigator.serviceWorker.register('./service-worker.js', { scope: '/divinewords/' })
-            .then((registration) => {
-              console.log('SW registered: ', registration.scope);
-            })
-            .catch((error) => {
-              console.error('SW registration failed: ', error);
-            });
-        });
-      }
-    </script>
   </body>
 </html>
